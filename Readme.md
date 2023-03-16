@@ -1,7 +1,6 @@
-# Easy Menus
-This plugin adds a basic main, options and pause menu to your godot project that is compatible with both keyboard and gamepad controls.
-# Intended Use
-It's intended to be used during gamejams to save some time on menus. Menus are nice to have but most of the time not a priority at gamejames. So here we come to help. You can also use it in a regular project as a temporary or even final menu. Use it however you wish.
+# Easy Menus Plus
+Fork of SavoVuksan/EasyMenus.
+Alongside the original additions of a basic main, options and pause menu to your godot project that is compatible with both keyboard and gamepad controls, added support for transitions, some basic eye-candy and seperate rendering of UI and the game.
 # Features
 * Keyboard and Gamepad support
 * Various audio and video settings
