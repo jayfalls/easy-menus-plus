@@ -39,6 +39,7 @@ The menu emits a `close` `signal` when closed. With this architecture the parent
 * Pause screen overlays/effects with presets
 * Previews of settings changes
 * Option to change resolution with ultrawide support
+* Seperation of audio & display in the options menu
 
 ## Completed Additions
 * Reworked the options menu to be more mobile friendly
