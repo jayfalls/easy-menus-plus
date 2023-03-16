@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://rw7gdui8lu3n"]
+[gd_scene load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://addons/EasyMenus/Scripts/pause_menu_controller.gd" id="1_5etq0"]
-[ext_resource type="PackedScene" uid="uid://qlskttl1wjr7" path="res://addons/EasyMenus/Scenes/options_menu.tscn" id="2_ejh0f"]
+[ext_resource type="Script" path="res://addons/Easy Menus Plus/Scripts/pause_menu_controller.gd" id="1_5etq0"]
+[ext_resource type="PackedScene" path="res://addons/Easy Menus Plus/Scenes/options_menu.tscn" id="2_ejh0f"]
 
 [node name="PauseMenu" type="Control"]
 process_mode = 3

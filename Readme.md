@@ -1,6 +1,7 @@
 # Easy Menus Plus
-Fork of SavoVuksan/EasyMenus.
-Alongside the original additions of a basic main, options and pause menu to your godot project that is compatible with both keyboard and gamepad controls, added support for transitions, some basic eye-candy and seperate rendering of UI and the game.
+Fork of [EasyMenus](https://github.com/SavoVuksan/EasyMenus).
+Adds a basic Main, Options & Pause Menu, with controller support.
+Expanded options and features over EasyMenus.
 # Features
 * Keyboard and Gamepad support
 * Various audio and video settings

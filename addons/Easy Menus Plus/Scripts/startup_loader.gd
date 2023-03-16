@@ -16,10 +16,10 @@ func load_settings():
 	var sfx_volume = linear_to_db(config.get_value(OptionsConstants.section_name, OptionsConstants.sfx_volume_key_name, 1))
 	var music_volume = linear_to_db(config.get_value(OptionsConstants.section_name, OptionsConstants.music_volume_key_name, 1))
 	var fullscreen = config.get_value(OptionsConstants.section_name, OptionsConstants.fullscreen_key_name, false)
-	var render_scale = config.get_value(OptionsConstants.section_name, OptionsConstants.render_scale_key, 1)
+	var render_quality = config.get_value(OptionsConstants.section_name, OptionsConstants.render_quality_key, 1.0)
 	var vsync = config.get_value(OptionsConstants.section_name, OptionsConstants.vsync_key, true)
-	var msaa_2d = config.get_value(OptionsConstants.section_name, OptionsConstants.msaa_2d_key, 0)
-	var msaa_3d = config.get_value(OptionsConstants.section_name, OptionsConstants.msaa_3d_key, 0)
+	var fsr = config.get_value(OptionsConstants.section_name, OptionsConstants.fsr_key, false)
+	var aa_mode = config.get_value(OptionsConstants.section_name, OptionsConstants.aa_mode_key, 0)
 	
 	AudioServer.set_bus_volume_db(sfx_bus_index, sfx_volume)
 	AudioServer.set_bus_volume_db(music_bus_index, music_volume)
@@ -28,15 +28,35 @@ func load_settings():
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	
-	get_viewport().scaling_3d_scale = render_scale
-	
 	if vsync:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
 	else:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
-		
-	set_msaa("msaa_2d", msaa_2d)
-	set_msaa("msaa_3d", msaa_3d)
+	
+	if fsr:
+		get_viewport().scaling_3d_mode = 1
+	else:
+		get_viewport().scaling_3d_mode = 0
+	
+	get_viewport().scaling_3d_scale = render_quality
+	
+	get_viewport().set("msaa_2d", Viewport.MSAA_DISABLED)
+	get_viewport().set("msaa_3d", Viewport.MSAA_DISABLED)
+	get_viewport().use_taa = false
+	match aa_mode:
+		0:
+			return
+		1:
+			get_viewport().set("msaa_2d",Viewport.MSAA_2X)
+			get_viewport().set("msaa_3d",Viewport.MSAA_2X)
+		2:
+			get_viewport().set("msaa_2d",Viewport.MSAA_4X)
+			get_viewport().set("msaa_3d",Viewport.MSAA_4X)
+		3:
+			get_viewport().set("msaa_2d",Viewport.MSAA_8X)
+			get_viewport().set("msaa_3d",Viewport.MSAA_8X)
+		4:
+			get_viewport().use_taa = true
 	
 func _ready():
 	load_settings()
