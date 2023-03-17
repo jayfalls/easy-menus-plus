@@ -1,10 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://w3wvfjvwy21j"]
+[gd_scene load_steps=7 format=3 uid="uid://mm0kfad1ywkx"]
 
-[ext_resource type="Script" path="res://addons/Easy Menus Plus/Scripts/options_menu_controller.gd" id="1_h6k46"]
+[ext_resource type="Script" path="res://addons/Easy Menus Plus/Options Menu/options_menu.gd" id="1_haqg8"]
 [ext_resource type="Script" path="res://addons/Easy Menus Plus/Scripts/follow_focus_center.gd" id="2_l3n3h"]
 [ext_resource type="PackedScene" uid="uid://cpj47iw4owuel" path="res://addons/Easy Menus Plus/Nodes/slider_w_labels.tscn" id="3_xghjq"]
-[ext_resource type="ButtonGroup" uid="uid://devqej35w2trs" path="res://addons/Easy Menus Plus/Scenes/render_quality_buttons.tres" id="4_4bdrq"]
-[ext_resource type="ButtonGroup" uid="uid://crunts3eux4jc" path="res://addons/Easy Menus Plus/Scenes/aa_buttons.tres" id="5_3x4xy"]
+[ext_resource type="ButtonGroup" uid="uid://devqej35w2trs" path="res://addons/Easy Menus Plus/Options Menu/Components/render_quality_buttons.tres" id="4_33tjh"]
+[ext_resource type="ButtonGroup" uid="uid://crunts3eux4jc" path="res://addons/Easy Menus Plus/Options Menu/Components/aa_buttons.tres" id="5_kmnek"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x77mt"]
 
@@ -15,7 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_h6k46")
+script = ExtResource("1_haqg8")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -137,7 +137,7 @@ alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 toggle_mode = true
-button_group = ExtResource("4_4bdrq")
+button_group = ExtResource("4_33tjh")
 text = "Native
 "
 
@@ -145,25 +145,25 @@ text = "Native
 layout_mode = 2
 toggle_mode = true
 button_pressed = true
-button_group = ExtResource("4_4bdrq")
+button_group = ExtResource("4_33tjh")
 text = "Ultra Quality"
 
 [node name="QualityButton" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/MarginContainer2/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 toggle_mode = true
-button_group = ExtResource("4_4bdrq")
+button_group = ExtResource("4_33tjh")
 text = "Quality"
 
 [node name="BalancedButton" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/MarginContainer2/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 toggle_mode = true
-button_group = ExtResource("4_4bdrq")
+button_group = ExtResource("4_33tjh")
 text = "Balanced"
 
 [node name="PerformanceButton" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/MarginContainer2/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 toggle_mode = true
-button_group = ExtResource("4_4bdrq")
+button_group = ExtResource("4_33tjh")
 text = "Performance
 "
 
@@ -201,26 +201,26 @@ alignment = 1
 [node name="OffButton" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/MarginContainer4/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 toggle_mode = true
-button_group = ExtResource("5_3x4xy")
+button_group = ExtResource("5_kmnek")
 text = "Off
 "
 
 [node name="2xButton" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/MarginContainer4/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 toggle_mode = true
-button_group = ExtResource("5_3x4xy")
+button_group = ExtResource("5_kmnek")
 text = "2x"
 
 [node name="4xButton" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/MarginContainer4/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 toggle_mode = true
-button_group = ExtResource("5_3x4xy")
+button_group = ExtResource("5_kmnek")
 text = "4x"
 
 [node name="8xButton" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/MarginContainer4/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 toggle_mode = true
-button_group = ExtResource("5_3x4xy")
+button_group = ExtResource("5_kmnek")
 text = "8x"
 
 [node name="TAAButton" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/MarginContainer4/VBoxContainer/HBoxContainer2"]
@@ -228,7 +228,7 @@ unique_name_in_owner = true
 layout_mode = 2
 toggle_mode = true
 button_pressed = true
-button_group = ExtResource("5_3x4xy")
+button_group = ExtResource("5_kmnek")
 text = "TAA
 "
 

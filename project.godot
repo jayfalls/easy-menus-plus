@@ -22,7 +22,7 @@ buses/default_bus_layout="res://addons/Easy Menus Plus/default_bus_layout.tres"
 
 [autoload]
 
-MenuTemplateManager="*res://addons/Easy Menus Plus/Nodes/menu_template_manager.tscn"
+MenuInterface="*res://addons/Easy Menus Plus/menu_interface.tscn"
 
 [display]
 

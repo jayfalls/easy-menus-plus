@@ -2,8 +2,8 @@ extends Control
 signal start_game_pressed
 
 @onready var start_game_button: Button = $%StartGameButton
-@onready var options_menu: Control = $%OptionsMenu
-@onready var content: Control = $%Content 
+@onready var options_menu: Control = $OptionsMenu
+@onready var content: Control = $Content 
 
 func _ready():
 	start_game_button.grab_focus()
@@ -24,3 +24,7 @@ func close_options():
 
 func _on_start_game_button_pressed():
 	emit_signal("start_game_pressed")
+
+
+func _on_options_menu_close():
+	pass # Replace with function body.

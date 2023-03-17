@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://bipi886g31qxg"]
+
+[ext_resource type="Script" path="res://addons/Easy Menus Plus/menu_interface.gd" id="1_xwuln"]
+[ext_resource type="PackedScene" path="res://addons/Easy Menus Plus/Nodes/controller_echo_input_generator.tscn" id="2_gyfy5"]
+[ext_resource type="PackedScene" path="res://addons/Easy Menus Plus/Managers/options_manager.tscn" id="3_vwcll"]
+
+[node name="MenuInterface" type="Node"]
+process_mode = 3
+script = ExtResource("1_xwuln")
+
+[node name="ControllerEchoInputGenerator" parent="." instance=ExtResource("2_gyfy5")]
+
+[node name="OptionsManager" parent="." instance=ExtResource("3_vwcll")]
