@@ -1,6 +1,6 @@
 extends Node
 
-const OptionConstants = preload("res://addons/Easy Menus Plus/Managers/options_constants.gd")
+#const OptionConstants = preload("res://addons/Easy Menus Plus/Managers/options_constants.gd")
 const InputMapUpdater = preload("res://addons/Easy Menus Plus/Scripts/input_map_updater.gd")
 
 @onready var ControllerEchoInputGenerator = $ControllerEchoInputGenerator

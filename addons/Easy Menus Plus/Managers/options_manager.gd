@@ -2,7 +2,7 @@ extends Node
 class_name OptionsManager
 
 # VARIABLES
-var config = ConfigFile.new()
+var config: ConfigFile = ConfigFile.new()
 # Config Values
 var sfx_volume: float
 var music_volume: float
@@ -53,27 +53,29 @@ func load_settings():
 	if err != OK:
 		return
 	
+	var section_name: String = OptionsConstants.section_name
 	# Audio
-	set_volume(music_bus_index, config.get_value(OptionsConstants.section_name, OptionsConstants.music_volume_key_name, 1))
-	set_volume(sfx_bus_index, config.get_value(OptionsConstants.section_name, OptionsConstants.sfx_volume_key_name, 1))
+	set_volume(music_bus_index, config.get_value(section_name, OptionsConstants.music_volume_key_name, OptionsConstants.def_music_volume))
+	set_volume(sfx_bus_index, config.get_value(section_name, OptionsConstants.sfx_volume_key_name, OptionsConstants.def_sfx_volume))
 	# Display
-	set_fullscreen(config.get_value(OptionsConstants.section_name, OptionsConstants.fullscreen_key_name, false))
-	set_vsync(config.get_value(OptionsConstants.section_name, OptionsConstants.vsync_key, true))
-	set_fsr(config.get_value(OptionsConstants.section_name, OptionsConstants.fsr_key, false))
-	int_to_fsr_sharpness(config.get_value(OptionsConstants.section_name, OptionsConstants.fsr_sharpness_key, 78))
-	set_render_scale(config.get_value(OptionsConstants.section_name, OptionsConstants.render_scale_key, render_qualities["native"]))
-	set_aa_mode(config.get_value(OptionsConstants.section_name, OptionsConstants.aa_mode_key, aa_modes.TAA))
+	set_fullscreen(config.get_value(section_name, OptionsConstants.fullscreen_key_name, OptionsConstants.def_fullscreen))
+	set_vsync(config.get_value(section_name, OptionsConstants.vsync_key, OptionsConstants.def_vsync))
+	set_fsr(config.get_value(section_name, OptionsConstants.fsr_key, OptionsConstants.def_fsr))
+	int_to_fsr_sharpness(config.get_value(section_name, OptionsConstants.fsr_sharpness_key, OptionsConstants.def_fsr_sharpness))
+	set_render_scale(config.get_value(section_name, OptionsConstants.render_scale_key, OptionsConstants.def_render_scale))
+	set_aa_mode(config.get_value(section_name, OptionsConstants.aa_mode_key, OptionsConstants.def_aa_mode))
 
 # Saves values to config file
 func save_options():
-	config.set_value(OptionsConstants.section_name,OptionsConstants.sfx_volume_key_name, sfx_volume)
-	config.set_value(OptionsConstants.section_name, OptionsConstants.music_volume_key_name, music_volume)
-	config.set_value(OptionsConstants.section_name, OptionsConstants.fullscreen_key_name, fullscreen)
-	config.set_value(OptionsConstants.section_name, OptionsConstants.vsync_key, vsync)
-	config.set_value(OptionsConstants.section_name, OptionsConstants.fsr_key, fsr)
-	config.set_value(OptionsConstants.section_name, OptionsConstants.render_scale_key, render_scale);
-	config.set_value(OptionsConstants.section_name, OptionsConstants.fsr_sharpness_key, fsr_sharpness)
-	config.set_value(OptionsConstants.section_name, OptionsConstants.aa_mode_key, aa_mode)
+	var section_name: String = OptionsConstants.section_name
+	config.set_value(section_name,OptionsConstants.sfx_volume_key_name, sfx_volume)
+	config.set_value(section_name, OptionsConstants.music_volume_key_name, music_volume)
+	config.set_value(section_name, OptionsConstants.fullscreen_key_name, fullscreen)
+	config.set_value(section_name, OptionsConstants.vsync_key, vsync)
+	config.set_value(section_name, OptionsConstants.fsr_key, fsr)
+	config.set_value(section_name, OptionsConstants.render_scale_key, render_scale);
+	config.set_value(section_name, OptionsConstants.fsr_sharpness_key, fsr_sharpness)
+	config.set_value(section_name, OptionsConstants.aa_mode_key, aa_mode)
 	
 	config.save(OptionsConstants.config_file_name)
 
@@ -92,12 +94,10 @@ func set_volume(bus_index: int, value: float):
 # DISPLAY
 func set_fullscreen(state: bool):
 	fullscreen = state
-	if fullscreen:
-		if DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN:
-			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
-	else:
-		if DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_WINDOWED:
-			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	if fullscreen and DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
+	elif DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_WINDOWED:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 
 func set_vsync(state: bool):
 	# There are multiple V-Sync Methods supported by Godot 
@@ -134,7 +134,7 @@ func set_fsr_sharpness(value: float):
 ## Resolution Scaling
 func set_render_scale(value: float):
 	render_scale = value
-	get_viewport().scaling_3d_scale = value
+	get_viewport().scaling_3d_scale = render_scale
 
 ## Anti-Aliasing
 func set_aa_mode(index: int):
