@@ -35,12 +35,20 @@ func _input(event):
 ## Loads options and sets the controls values to loaded values. Uses default values if config file does not exist
 func load_options():
 	manager.load_settings()
-	
+	assign_options()
+
+# Resets all the options to default
+func _on_reset_defaults_button_pressed():
+	manager.reset_defaults()
+	assign_options()
+
+## Updates the UI with the values stored in the manager
+func assign_options():
+	# Audio
 	sfx_volume_slider.hslider.value = manager.sfx_volume
 	music_volume_slider.hslider.value = manager.music_volume
-	
+	#Display
 	fullscreen_check_button.button_pressed = manager.fullscreen
-	
 	# Need to set it like that to guarantee signal to be triggered
 	vsync_check_button.set_pressed_no_signal(manager.vsync)
 	vsync_check_button.emit_signal("toggled", manager.vsync)
@@ -59,10 +67,10 @@ func load_options():
 	
 	# Assign FSR sharpness
 	fsr_sharpness_slider.value = manager.fsr_sharpness
-	
 	# Assign the right AA button
 	var aa_buttons: Array[BaseButton] = $%TAAButton.button_group.get_buttons()
 	aa_buttons[manager.aa_mode].button_pressed = true
+
 
 # UI CHANGES
 # AUDIO

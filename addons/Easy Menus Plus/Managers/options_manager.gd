@@ -79,6 +79,17 @@ func save_options():
 	
 	config.save(OptionsConstants.config_file_name)
 
+func reset_defaults():
+	set_volume(music_bus_index, OptionsConstants.def_music_volume)
+	set_volume(sfx_bus_index, OptionsConstants.def_sfx_volume)
+	# Display
+	set_fullscreen(OptionsConstants.def_fullscreen)
+	set_vsync(OptionsConstants.def_vsync)
+	set_fsr(OptionsConstants.def_fsr)
+	int_to_fsr_sharpness(OptionsConstants.def_fsr_sharpness)
+	set_render_scale(OptionsConstants.def_render_scale)
+	set_aa_mode(OptionsConstants.def_aa_mode)
+
 
 # UPDATE SETTINGS
 # AUDIO
@@ -94,9 +105,9 @@ func set_volume(bus_index: int, value: float):
 # DISPLAY
 func set_fullscreen(state: bool):
 	fullscreen = state
-	if fullscreen and DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN:
+	if fullscreen:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
-	elif DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_WINDOWED:
+	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 
 func set_vsync(state: bool):
