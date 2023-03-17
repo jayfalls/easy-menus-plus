@@ -8,6 +8,7 @@ signal  close
 ## Preload
 @onready var manager: OptionsManager = MenuInterface.options_manager
 ### UI
+@onready var ultrawide_margin: MarginContainer = $MarginContainer/ScrollContainer/UltrawideMarginContainer
 @onready var sfx_volume_slider : HSliderWLabel = $%SFXVolumeSlider
 @onready var music_volume_slider: HSliderWLabel = $%MusicVolumeSlider
 @onready var fullscreen_check_button: CheckButton = $%FullscreenCheckButton

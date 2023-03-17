@@ -26,8 +26,11 @@ MenuInterface="*res://addons/Easy Menus Plus/menu_interface.tscn"
 
 [display]
 
-window/size/viewport_width=800
+window/size/viewport_width=1400
 window/size/viewport_height=600
+window/size/resizable=false
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 window/size/fullscreen=true
 
 [dotnet]
