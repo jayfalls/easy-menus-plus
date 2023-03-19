@@ -9,11 +9,6 @@ Expanded options and features over EasyMenus.
 * Various audio and video settings
 * Autosaving and loading of settings (Data persistence)
 
-# Main Menu
-<img src="Screenshots/main_menu.gif" width="600" />
-
-Just connect your scene loading logic to the `start_game_pressed` signal of the main menu scene.
-
 # Options Menu
 
 The options menu loads and persists the settings when opened/closed. The data is saved in the `user://options.cfg` (e.g. `C:\Users\<Username>\AppData\Roaming\Godot\app_userdata\<Project>/options.cfg` on Windows) file.
@@ -27,12 +22,6 @@ The Options Menu offers following settings to be changed
 * Render Scale for 3D Scenes
 * Anti Aliasing (MSAA / TAA)
 
-The menu emits a `close` `signal` when closed. With this architecture the parent node decides what to do when the options menu is closed. 
-
-# How to use
-* Add the `res://addons/MenuTemplates/Nodes/menu_templates_manager.tscn` scene to the autoload of your project.
-* For the Audio Sliders to work properly you need to create 2 Audio Buses one called `SFX` and the other called `Music` in your audio bus layout file
-
 # Upcoming Features
 * Mobile support
 * Transitions & Loading screens with presets
@@ -40,8 +29,21 @@ The menu emits a `close` `signal` when closed. With this architecture the parent
 * Previews of settings changes
 * Option to change resolution with ultrawide support
 * Seperation of audio & display in the options menu
+* Change the menu_interface(old menu_templates_manager) to a startup manager which will handle all configurations, options, customisation, boot splashes and debugging
+* Animation manager for all menus
+* Confirmation Dialogs
+* Advanced/More Graphics Options
+* Toggle between gamepad/keyboard mode based on input
+* Control Hints
+* Control Remapping
+* Accessibility Options
+* Full Localisation
+* Multiple Menu Layouts
+* Preset Themes
+* Documentation
 
 ## Completed Additions
 * Reworked the options menu to be more mobile friendly
 * Added FSR to options menu
 * Added TAA to options menu
+* AddedpPreliminary Ultrawide support
