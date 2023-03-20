@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://jcwdfsnklw2a"]
+[gd_scene load_steps=2 format=3 uid="uid://df1goejrn63dk"]
 
-[ext_resource type="Script" path="res://addons/Easy Menus Plus/Scripts/main_menu_controller.gd" id="1_lbw7r"]
-[ext_resource type="PackedScene" uid="uid://mm0kfad1ywkx" path="res://addons/Easy Menus Plus/Options Menu/options_menu.tscn" id="2_myehq"]
+[ext_resource type="Script" path="res://addons/Easy Menus Plus/Main Menu/main_menu.gd" id="1_p3s3b"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -10,7 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_lbw7r")
+script = ExtResource("1_p3s3b")
 
 [node name="Content" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -69,11 +68,6 @@ focus_previous = NodePath("../OptionsButton")
 theme_override_font_sizes/font_size = 30
 text = "Quit"
 
-[node name="OptionsMenu" parent="." instance=ExtResource("2_myehq")]
-visible = false
-layout_mode = 1
-
 [connection signal="pressed" from="Content/StartGameButton" to="." method="_on_start_game_button_pressed"]
 [connection signal="pressed" from="Content/OptionsButton" to="." method="open_options"]
 [connection signal="pressed" from="Content/QuitButton" to="." method="quit"]
-[connection signal="close" from="OptionsMenu" to="." method="close_options"]

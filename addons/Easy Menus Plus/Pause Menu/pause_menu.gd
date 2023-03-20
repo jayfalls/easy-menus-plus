@@ -1,4 +1,6 @@
 extends Control
+class_name EasyPauseMenu
+
 signal resume
 signal back_to_main_pressed
 

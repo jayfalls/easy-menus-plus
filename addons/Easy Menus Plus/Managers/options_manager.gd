@@ -6,6 +6,9 @@ var config: ConfigFile = ConfigFile.new()
 # Config Values
 var sfx_volume: float
 var music_volume: float
+var resolution: Vector2i:
+	set(value):
+		set_resolution(value)
 var fullscreen: bool
 var vsync: bool
 var fsr: bool
@@ -15,27 +18,6 @@ var aa_mode: int
 ## Audio
 var sfx_bus_index: int
 var music_bus_index: int
-enum audio_busses {
-	MUSIC,
-	SFX
-}
-## Rendering Quality Values
-const render_qualities: Dictionary = {
-	native = 1.0,
-	ultra_quality = 0.77,
-	quality = 0.67,
-	balanced = 0.59,
-	performance = 0.5,
-	fsr_native = 0.9
-}
-## Anti-Aliasing Values
-enum aa_modes {
-	OFF,
-	TX,
-	FX,
-	EX,
-	TAA
-}
 
 
 # INITIALISATION
@@ -58,6 +40,7 @@ func load_settings():
 	set_volume(music_bus_index, config.get_value(section_name, OptionsConstants.music_volume_key_name, OptionsConstants.def_music_volume))
 	set_volume(sfx_bus_index, config.get_value(section_name, OptionsConstants.sfx_volume_key_name, OptionsConstants.def_sfx_volume))
 	# Display
+	resolution = config.get_value(section_name, OptionsConstants.resolution_key_name, OptionsConstants.def_resolution)
 	set_fullscreen(config.get_value(section_name, OptionsConstants.fullscreen_key_name, OptionsConstants.def_fullscreen))
 	set_vsync(config.get_value(section_name, OptionsConstants.vsync_key, OptionsConstants.def_vsync))
 	set_fsr(config.get_value(section_name, OptionsConstants.fsr_key, OptionsConstants.def_fsr))
@@ -103,12 +86,20 @@ func set_volume(bus_index: int, value: float):
 
 
 # DISPLAY
+func set_resolution(value: Vector2i):
+	if fullscreen:
+		get_viewport().size = resolution
+	else:
+		DisplayServer.window_set_size(DisplayServer.screen_get_size())
+
 func set_fullscreen(state: bool):
 	fullscreen = state
 	if fullscreen:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		DisplayServer.window_set_position(Vector2i(0,0))
+	set_resolution(resolution)
 
 func set_vsync(state: bool):
 	# There are multiple V-Sync Methods supported by Godot 
@@ -157,16 +148,16 @@ func set_aa_mode(index: int):
 	
 	# Set new AA
 	match aa_mode:
-		aa_modes.OFF:
+		OptionsConstants.aa_modes.OFF:
 			return
-		aa_modes.TX:
+		OptionsConstants.aa_modes.TX:
 			get_viewport().set("msaa_2d",Viewport.MSAA_2X)
 			get_viewport().set("msaa_3d",Viewport.MSAA_2X)
-		aa_modes.FX:
+		OptionsConstants.aa_modes.FX:
 			get_viewport().set("msaa_2d",Viewport.MSAA_4X)
 			get_viewport().set("msaa_3d",Viewport.MSAA_4X)
-		aa_modes.EX:
+		OptionsConstants.aa_modes.EX:
 			get_viewport().set("msaa_2d",Viewport.MSAA_8X)
 			get_viewport().set("msaa_3d",Viewport.MSAA_8X)
-		aa_modes.TAA:
+		OptionsConstants.aa_modes.TAA:
 			get_viewport().use_taa = true

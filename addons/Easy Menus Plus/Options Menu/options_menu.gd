@@ -1,4 +1,5 @@
 extends Control
+class_name EasyOptionsMenu
 
 # SIGNALS
 signal  close
@@ -8,9 +9,11 @@ signal  close
 ## Preload
 @onready var manager: OptionsManager = MenuInterface.options_manager
 ### UI
-@onready var ultrawide_margin: MarginContainer = $MarginContainer/ScrollContainer/UltrawideMarginContainer
+@onready var ultrawide_margin: UltrawideMarginContainer = $MarginContainer/ScrollContainer/UltrawideMarginContainer
 @onready var sfx_volume_slider : HSliderWLabel = $%SFXVolumeSlider
 @onready var music_volume_slider: HSliderWLabel = $%MusicVolumeSlider
+@onready var aspect_ratios_button: OptionButton = $%AspectRatiosButton
+@onready var resolutions_button: OptionButton = $%ResolutionButton
 @onready var fullscreen_check_button: CheckButton = $%FullscreenCheckButton
 @onready var vsync_check_button: CheckButton = $%VSyncCheckButton
 @onready var fsr_check_button: CheckButton = $%FSRCheckButton
@@ -58,10 +61,10 @@ func assign_options():
 	
 	# Assign the right render quality button
 	var render_quality_buttons: Array[BaseButton] = $%NativeButton.button_group.get_buttons()
-	var current_quality: String = manager.render_qualities.find_key(manager.render_scale)
-	var quality_index: int = manager.render_qualities.keys().find(current_quality)
+	var current_quality: String = OptionsConstants.render_scales.find_key(manager.render_scale)
+	var quality_index: int = OptionsConstants.render_scales.keys().find(current_quality)
 	## Accounting for two different native scales, with only one button
-	if quality_index == manager.render_qualities.size() - 1:
+	if quality_index == OptionsConstants.render_scales.size() - 1:
 		render_quality_buttons[0].button_pressed = true
 	else:
 		render_quality_buttons[quality_index].button_pressed = true
@@ -82,6 +85,22 @@ func _on_music_volume_slider_value_changed(value):
 	manager.set_volume(manager.music_bus_index, value)
 
 # DISPLAY OPTIONS
+## Resolution
+func _on_aspect_ratio_button_item_selected(index):
+	resolutions_button.clear()
+	var resolutions: Array[Vector2i] = OptionsConstants[OptionsConstants.aspects_to_res_map[index]]
+	for res in resolutions:
+		var text: String = str(res.x) + "x" + str(res.y)
+		resolutions_button.add_item(text)
+
+func _on_resolution_apply_button_pressed():
+	var res_text: String = resolutions_button.get_item_text(resolutions_button.get_selected_id())
+	var split_index: int = res_text.find("x")
+	var x: int = int(res_text.substr(0, split_index))
+	var y: int = int(res_text.substr(split_index + 1, res_text.length() - split_index))
+	manager.resolution = Vector2i(x,y)
+
+## Display Settings
 func _on_fullscreen_check_button_toggled(button_pressed):
 	manager.set_fullscreen(button_pressed)
 
@@ -96,13 +115,13 @@ func _on_fsr_check_button_toggled(button_pressed):
 func toggle_fsr_options(state: bool):
 	fsr_sharpness_slider.editable = state
 	# Stop execution if native rendering quality isn't selected
-	if manager.render_scale < manager.render_qualities["fsr_native"]:
+	if manager.render_scale < OptionsConstants.render_scales["fsr_native"]:
 		return
 	# Assigns render quality based on FSR state
 	if state == true:
-		manager.set_render_scale(manager.render_qualities["fsr_native"])
+		manager.set_render_scale(OptionsConstants.render_scales["fsr_native"])
 	else:
-		manager.set_render_scale(manager.render_qualities["native"])
+		manager.set_render_scale(OptionsConstants.render_scales["native"])
 
 ## Sharpness
 func _on_fsr_sharpness_slider_value_changed(value):
@@ -111,26 +130,26 @@ func _on_fsr_sharpness_slider_value_changed(value):
 ## Resolution Scaling
 func _on_native_button_pressed():
 	if fsr_check_button.toggled:
-		manager.set_render_scale(manager.render_qualities["fsr_native"])
+		manager.set_render_scale(OptionsConstants.render_scales["fsr_native"])
 	else:
-		manager.set_render_scale(manager.render_qualities["native"])
+		manager.set_render_scale(OptionsConstants.render_scales["native"])
 func _on_ultra_quality_button_pressed():
-	manager.set_render_scale(manager.render_qualities["ultra_quality"])
+	manager.set_render_scale(OptionsConstants.render_scales["ultra_quality"])
 func _on_quality_button_pressed():
-	manager.set_render_scale(manager.render_qualities["quality"])
+	manager.set_render_scale(OptionsConstants.render_scales["quality"])
 func _on_balanced_button_pressed():
-	manager.set_render_scale(manager.render_qualities["balanced"])
+	manager.set_render_scale(OptionsConstants.render_scales["balanced"])
 func _on_performance_button_pressed():
-	manager.set_render_scale(manager.render_qualities["performance"])
+	manager.set_render_scale(OptionsConstants.render_scales["performance"])
 
 ## AA Options
 func _on_off_button_pressed():
-	manager.set_aa_mode(manager.aa_modes.OFF)
+	manager.set_aa_mode(OptionsConstants.aa_modes.OFF)
 func _on_2x_button_pressed():
-	manager.set_aa_mode(manager.aa_modes.TX)
+	manager.set_aa_mode(OptionsConstants.aa_modes.TX)
 func _on_4x_button_pressed():
-	manager.set_aa_mode(manager.aa_modes.FX)
+	manager.set_aa_mode(OptionsConstants.aa_modes.FX)
 func _on_8x_button_pressed():
-	manager.set_aa_mode(manager.aa_modes.EX)
+	manager.set_aa_mode(OptionsConstants.aa_modes.EX)
 func _on_taa_button_pressed():
-	manager.set_aa_mode(manager.aa_modes.TAA)
+	manager.set_aa_mode(OptionsConstants.aa_modes.TAA)

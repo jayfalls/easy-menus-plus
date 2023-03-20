@@ -1,4 +1,5 @@
 extends MarginContainer
+class_name UltrawideMarginContainer
 
 var border_margin: Vector2 = Vector2(15,30)
 

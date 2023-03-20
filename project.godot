@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Easy Menus Plus"
 config/description="This plugin adds a basic main, options and pause menu to your project."
-run/main_scene="res://addons/Easy Menus Plus/Scenes/main_menu.tscn"
+run/main_scene="res://addons/Easy Menus Plus/startup_loader.tscn"
 config/features=PackedStringArray("4.0")
 config/icon="res://EasyMenusLogo.png"
 
@@ -29,8 +29,6 @@ MenuInterface="*res://addons/Easy Menus Plus/menu_interface.tscn"
 window/size/viewport_width=800
 window/size/viewport_height=600
 window/size/resizable=false
-window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
 window/size/fullscreen=true
 
 [dotnet]
