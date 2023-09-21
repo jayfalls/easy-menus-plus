@@ -22,28 +22,8 @@ The Options Menu offers following settings to be changed
 * Render Scale for 3D Scenes
 * Anti Aliasing (MSAA / TAA)
 
-# Upcoming Features
-* Mobile support
-* Transitions & Loading screens with presets
-* Pause screen overlays/effects with presets
-* Previews of settings changes
-* Option to change resolution with ultrawide support
-* Seperation of audio & display in the options menu
-* Change the menu_interface(old menu_templates_manager) to a startup manager which will handle all configurations, options, customisation, boot splashes and debugging
-* Animation manager for all menus
-* Confirmation Dialogs
-* Advanced/More Graphics Options
-* Toggle between gamepad/keyboard mode based on input
-* Control Hints
-* Control Remapping
-* Accessibility Options
-* Full Localisation
-* Multiple Menu Layouts
-* Preset Themes
-* Documentation
-
 ## Completed Additions
 * Reworked the options menu to be more mobile friendly
 * Added FSR to options menu
 * Added TAA to options menu
-* AddedpPreliminary Ultrawide support
+* Added Preliminary Ultrawide support
